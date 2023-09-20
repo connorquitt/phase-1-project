@@ -8,3 +8,27 @@ body{
    height: 100vh;
    background-color: aqua;
 }
+
+.profile input[type=text] {
+   float: left;
+   padding: 6px;
+   border: none;
+   margin-top: 8px;
+   margin-right: 16px;
+   font-size: 17px;
+ }
+
+ .profile button {
+   float: left;
+   padding: 6px;
+   border: none;
+   margin-top: 8px;
+   margin-right: 16px;
+   font-size: 17px;
+ }
+
+ .profile button:hover {
+   background-color: #2196F3;
+   color: white;
+   
+ }
