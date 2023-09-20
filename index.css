@@ -6,7 +6,7 @@
 body{
    width: 100vw;
    height: 100vh;
-   background-color: aqua;
+   background-color: #d3d3d3;
 }
 
 .profile input[type=text] {
@@ -30,5 +30,22 @@ body{
  .profile button:hover {
    background-color: #2196F3;
    color: white;
-   
+ }
+
+ #drop-label {
+  float: left;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+ }
+
+ #click-drop {
+  float: left;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
  }
