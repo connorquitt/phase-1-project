@@ -1,0 +1,25 @@
+{
+    "teams": [
+      {
+        "id": 1,
+        "name": "purple",
+        "points": 0
+      },
+      {
+        "id": 2,
+        "name": "blue",
+        "points": 0
+        
+      },
+      {
+        "id": 3,
+        "name": "red",
+        "points": 0
+      },
+      {
+        "id": 4,
+        "name": "green",
+        "points": 0
+      }
+    ]
+  }
