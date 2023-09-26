@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const blueScore = document.querySelector("#blue-total")
     const yellowScore = document.querySelector("#yellow-total")
     const greenScore = document.querySelector("#green-total")
-    console.log(purpleScore.textContent)
+    const test = document.querySelector("#test")
 
     //makes username and team select store values
     document.querySelector("#start-btn").addEventListener("click", ()=>{
@@ -23,6 +23,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
         //makes timer start
         const gameTimer = setInterval(countdown, 1000)
         gameTimer
+
+        //fetch & post requests
+    fetch("http://localhost:3000/teams")
+    .then(res => res.json())
+    .then(data => {
+      let winner = data.filter(color => color.teamName === team.innerHTML)
+      console.log(winner)
+      return winner
+    })
     })
 
     //makes button work and stores points
@@ -44,16 +53,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
             finalMsg.textContent = `Congrats ${username.textContent} on scoring ${finalScore} for team ${team.textContent}!`
             retryBtn.classList.remove("hidden")
             scoreboard.classList.remove("hidden")
-            console.log(team.textContent)
         }
     }, 100)
-
-    //fetch & post requests
-    fetch("http://localhost:3000/teams")
-        .then(res => res.json())
-        .then(data => {
-           
-        })
 
     //functions
         
@@ -65,6 +66,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 timer.textContent--
             }
         }
-    
+
+        function updateScore(data, color) {
+            return data.filter(team => team.teamName == color)
+          }
+        
+        
    
 })

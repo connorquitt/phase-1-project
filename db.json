@@ -2,24 +2,24 @@
     "teams": [
       {
         "id": 1,
-        "name": "purple",
-        "points": 0
+        "teamName": "purple",
+        "score": 0
       },
       {
         "id": 2,
-        "name": "blue",
-        "points": 0
+        "teamName": "blue",
+        "score": 0
         
       },
       {
         "id": 3,
-        "name": "red",
-        "points": 0
+        "teamName": "yellow",
+        "score": 0
       },
       {
         "id": 4,
-        "name": "green",
-        "points": 0
+        "teamName": "green",
+        "score": 0
       }
     ]
   }
