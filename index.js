@@ -62,11 +62,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
         
       //submit button/updating scoring in json file
         function updateScore(teamObj) {
-            fetch(`http://localhost:3000/teams${teamObj.score}`,{
+            fetch(`http://localhost:3000/teams${teamObj.id}`,{
                 method: "PATCH",
-                
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(score)
             })
         }
         
    
 })
+
+//want to use foreach instead to turn them into a type of card to show as a leaderboard and then i can still send a patch request to update the score on the cards
+//like i've already done :)
