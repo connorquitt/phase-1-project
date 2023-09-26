@@ -19,6 +19,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
     })
 
     //makes button work and stores points
+    clicker.addEventListener("click", ()=>{
+        if(timer.textContent > 0){
+            clicks++
+            points.innerHTML= `points: ${clicks}`
+        }else{
+            let finalScore = clicks
+        }
+    })
    
 })
 
