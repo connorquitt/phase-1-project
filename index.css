@@ -55,3 +55,15 @@ body{
   margin-left: 150px;
 
 }
+
+#retry {
+  font-size: 50px;
+  padding: 6px;
+  border: none;
+  margin-left: 50px;
+}
+
+#retry:hover {
+  background-color: #2196F3;
+  color: white;
+}
