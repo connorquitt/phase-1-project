@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const blueScore = document.querySelector("#blue-total")
     const yellowScore = document.querySelector("#yellow-total")
     const greenScore = document.querySelector("#green-total")
-    const test = document.querySelector("#test")
+    let localScore = []
+    
 
     //makes username and team select store values
     document.querySelector("#start-btn").addEventListener("click", ()=>{
@@ -23,15 +24,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
         //makes timer start
         const gameTimer = setInterval(countdown, 1000)
         gameTimer
-
-        //fetch & post requests
-    fetch("http://localhost:3000/teams")
-    .then(res => res.json())
-    .then(data => {
-      let winner = data.filter(color => color.teamName === team.innerHTML)
-      console.log(winner)
-      return winner
-    })
     })
 
     //makes button work and stores points
@@ -67,10 +59,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }
         }
 
-        function updateScore(data, color) {
-            return data.filter(team => team.teamName == color)
-          }
         
+      //submit button/updating scoring in json file
+        function updateScore(teamObj) {
+            fetch(`http://localhost:3000/teams${teamObj.score}`,{
+                method: "PATCH",
+                
+            })
+        }
         
    
 })

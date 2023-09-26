@@ -20,6 +20,11 @@
         "id": 4,
         "teamName": "green",
         "score": 0
+      },
+      {
+        "id": 5,
+        "teamName": "pink",
+        "score": 0
       }
     ]
   }
