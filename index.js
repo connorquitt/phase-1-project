@@ -44,7 +44,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }, 100)
 
     //scoreboard functionality
-    
+    fetch(`http://localhost:3000/teams`)
+        .then(res => res.json())
+        .then(data => {
+            data.forEach((e)=>{
+                let teamScore = document.createElement('li')
+                    teamScore.innerHTML = `${e.teamName} has: ${e.score} points!`
+                    scoreboard.appendChild(teamScore)
+
+            })
+        })
 
     //functions
         
