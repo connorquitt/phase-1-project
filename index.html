@@ -9,16 +9,26 @@
   <body>
         <div>
           <h1>Clicker Game</h1>
-          <h1 id="timer">15</h1>
+          <h1 id="timer">2</h1>
           <h1 id="points">points: 0</h1>
         </div>
         <div class="profile">
           <input type="text" placeholder="Username" id="username">
+          <label id="team-names">Select Team</label>
+          <select name="select-clicker" id="click-drop">
+            <option value="1">purple</option>
+            <option value="2">blue</option>
+            <option value="3">yellow</option>
+            <option value="4">green</option>
+            <option value="5">pink</option>
+          </select>
           <button class="button" id="start-btn">Start</button>
         </div>
         <div class="clickers">
           <img id="red-clicker" src="https://i.imgur.com/607gv3s.png">
-          <button class="hidden" id="retry">Retry</button>
+          <form class="hidden" id="retry">
+              <input type="submit" class="button"></input>
+          </form>
         </div>
         <div>
           <h2 id="score-msg"></h2>

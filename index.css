@@ -74,8 +74,3 @@ body{
   border: none;
   margin-left: 50px;
 }
-
-#retry:hover {
-  background-color: #2196F3;
-  color: white;
-}

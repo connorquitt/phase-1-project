@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", ()=>{
     //variables
     let username = document.querySelector("#username")
+    let team = document.querySelector("#team-names")
     const clicker = document.querySelector("#red-clicker")
     const points = document.querySelector("#points")
     let clicks = 0
@@ -8,12 +9,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const finalMsg = document.querySelector("#score-msg")
     const retryBtn = document.querySelector("#retry")
     const scoreboard = document.querySelector("#scoreboard")
-    const form = document.querySelector("#form")
     
     
     //makes username and team select store values
     document.querySelector("#start-btn").addEventListener("click", ()=>{
-        username.textContent = username.value 
+        username.textContent = username.value
+        
         
         //makes timer start
         const gameTimer = setInterval(countdown, 1000)
@@ -30,15 +31,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
     //makes retry button work
-    retryBtn.addEventListener("click", ()=> document.location.reload(true))
+    retryBtn.addEventListener("submit", ()=> {
+        event.preventDefault()
+        console.log("hi")
+    })
+    
 
     //recognizes timer is at 0 and triggers events
     setInterval(function checkTimer() {
         if(timer.textContent == 0){
             clearTimeout()
-            finalMsg.textContent = `Congrats ${username.textContent} on scoring ${clicks}! Please select which team to donate them to`
+            finalMsg.textContent = `Congrats ${username.textContent} on scoring ${clicks} for team ${team.textContent}!`
             retryBtn.classList.remove("hidden")
-            document.querySelector("#score-hold").classList.remove("hidden")
+            //document.querySelector("#score-hold").classList.remove("hidden")
         }
     }, 100)
 
@@ -76,7 +81,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             let teamPoints = e.score
                 teamPoints.id = 'current-points'
             let teamScore = document.createElement('li')
-                    teamScore.textContent = `${e.teamName} has: ${e.score} points!`
+                    teamScore.textContent = `${e.teamName}: ${e.score}`
                 let updatePoints = document.createElement('button')
                     updatePoints.className = 'update-button'
                     updatePoints.id = 'submit-score'
@@ -86,7 +91,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 teamScore.querySelector("#submit-score").addEventListener('click', ()=> {
                     e.score += clicks
                     clicks = 0
-                    teamScore.textContent = `${e.teamName} has: ${e.score} points!`
+                    teamScore.textContent = `${e.teamName}: ${e.score}`
                     updateScore(e)
                 })
         }
