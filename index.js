@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const finalMsg = document.querySelector("#score-msg")
     const retryBtn = document.querySelector("#retry")
     const scoreboard = document.querySelector("#scoreboard")
+    const form = document.querySelector("#form")
     
     
     //makes username and team select store values
@@ -45,27 +46,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
     //scoreboard functionality
     fetch(`http://localhost:3000/teams`)
         .then(res => res.json())
-        .then(data => {
-            data.forEach((e)=>{
-                let teamScore = document.createElement('li')
-                    teamScore.innerHTML = `${e.teamName} has: ${e.score} points!`
-                let updatePoints = document.createElement('button')
-                    updatePoints.textContent = 'Select Team'
-                teamScore.appendChild(updatePoints)
-                scoreboard.appendChild(teamScore)
-            })
-        })
+        .then(data => data.forEach(e => makeScoreCard(e)))
 
         //scoreboard update from points scored
-        fetch(`ttp://localhost:3000/teams`, {
+        function updateScore(team) {
+            fetch(`ttp://localhost:3000/teams${team.teamName}`, {
             method: 'PATCH',
             headers:{
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify()
         })
-        .then(res => res.json())
+        .then(res => res.json(team))
         .then(data => console.log(data))
+        }
 
     //functions
         
@@ -76,6 +70,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }else {
                 timer.textContent--
             }
+        }
+
+        //creates one team scorecard
+        function makeScoreCard(e){
+            let teamScore = document.createElement('li')
+                    teamScore.innerHTML = `${e.teamName} has: ${e.score} points!`
+                let updatePoints = document.createElement('button')
+                    updatePoints.className = 'button'
+                    updatePoints.id = 'submit-score'
+                    updatePoints.textContent = 'Select Team'
+                teamScore.appendChild(updatePoints)
+                scoreboard.appendChild(teamScore)
+                teamScore.querySelector("#submit-score").addEventListener('click', ()=>console.log("click"))
         }
 
         
