@@ -3,17 +3,17 @@
     {
       "id": 1,
       "teamName": "purple",
-      "score": 43
+      "score": 0
     },
     {
       "id": 2,
       "teamName": "blue",
-      "score": 43
+      "score": 0
     },
     {
       "id": 3,
       "teamName": "yellow",
-      "score": 95
+      "score": 0
     },
     {
       "id": 4,
@@ -23,7 +23,7 @@
     {
       "id": 5,
       "teamName": "pink",
-      "score": 12
+      "score": 0
     }
   ]
 }
