@@ -12,8 +12,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
     
     //makes username and team select store values
-    document.querySelector("#start-btn").addEventListener("submit", ()=>{
-        event.preventDefault()
+    document.querySelector("#start-btn").addEventListener("click", ()=>{
         username.textContent = username.value 
         retryBtn.innerText = 'Retry'
         //makes timer start
