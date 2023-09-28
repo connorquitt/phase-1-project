@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", ()=>{
     //variables
     let username = document.querySelector("#username")
-    let team = document.querySelector("#team-names")
     const clicker = document.querySelector("#red-clicker")
     const points = document.querySelector("#points")
     let clicks = 0
@@ -9,13 +8,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const finalMsg = document.querySelector("#score-msg")
     const retryBtn = document.querySelector("#retry")
     const scoreboard = document.querySelector("#scoreboard")
-
-
+    
+    
+    
     //makes username and team select store values
     document.querySelector("#start-btn").addEventListener("click", ()=>{
-        username.textContent = username.value
-        console.log(team.value)
-        
+        username.textContent = username.value 
+        retryBtn.innerText = 'Retry'
         //makes timer start
         const gameTimer = setInterval(countdown, 1000)
         gameTimer
@@ -31,19 +30,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
     //makes retry button work
-    retryBtn.addEventListener("submit", ()=> {
-        event.preventDefault()
-        console.log(team.value)
-        let teamVal = team.value
-        updateScore(teamVal)
-    })
-    
+    retryBtn.addEventListener("click", ()=> document.location.reload(true))
 
     //recognizes timer is at 0 and triggers events
     setInterval(function checkTimer() {
         if(timer.textContent == 0){
             clearTimeout()
-            finalMsg.textContent = `Congrats ${username.textContent} on scoring ${clicks} points!`
+            finalMsg.textContent = `Congrats ${username.textContent} on scoring ${clicks}! Please select which team to donate them to`
             retryBtn.classList.remove("hidden")
             document.querySelector("#score-hold").classList.remove("hidden")
         }
@@ -55,15 +48,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
         .then(data => data.forEach(e => makeScoreCard(e)))
 
         //scoreboard update from points scored
-       function updateScore(e) {
-            fetch(`http://localhost:3000/teams/${e.value}`, {
+        function updateScore(team) {
+            fetch(`http://localhost:3000/teams/${team.id}`, {
             method: 'PATCH',
             headers:{
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(e)
+            body: JSON.stringify(team)
         })
-        .then(res => res.json())
+        .then(res => res.json(team))
         .then(data => console.log(data))
         }
 
@@ -83,8 +76,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
             let teamPoints = e.score
                 teamPoints.id = 'current-points'
             let teamScore = document.createElement('li')
-                    teamScore.textContent = `${e.teamName}: ${e.score}`
+                    teamScore.textContent = `${e.teamName} has: ${e.score} points!`
+                let updatePoints = document.createElement('button')
+                    updatePoints.className = 'update-button'
+                    updatePoints.id = 'submit-score'
+                    updatePoints.textContent = 'Select Team'
+                teamScore.appendChild(updatePoints)
                 scoreboard.appendChild(teamScore)
+                teamScore.querySelector("#submit-score").addEventListener('click', ()=> {
+                    e.score += clicks
+                    clicks = 0
+                    teamScore.textContent = `${e.teamName} has: ${e.score} points!`
+                    updateScore(e)
+                })
         }
 
         
