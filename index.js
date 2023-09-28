@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     clicker.addEventListener("click", ()=>{
         if(timer.textContent > 0){
             clicks++
-            points.innerHTML= `points: ${clicks}`
+            points.textContent= `points: ${clicks}`
         }
     })
     })
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     setInterval(function checkTimer() {
         if(timer.textContent == 0){
             clearTimeout()
-            finalMsg.textContent = `Congrats ${username.textContent} on scoring ${clicks}! Please select which team to donate them to`
+            finalMsg.textContent = `Congrats ${username.textContent} you have ${clicks} points! Please select which team to donate them to`
             retryBtn.classList.remove("hidden")
             document.querySelector("#score-hold").classList.remove("hidden")
         }
@@ -87,9 +87,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     e.score += clicks
                     clicks = 0
                     teamScore.textContent = `${e.teamName} has: ${e.score} points!`
+                    points.textContent = `points: ${clicks}`
                     updateScore(e)
                 })
         }
+
+        document.addEventListener("keydown", () => {
+            if(event.key === "Tab") {
+                document.querySelector("#score-hold").classList.remove("hidden")
+            }
+        })
 
         
    
