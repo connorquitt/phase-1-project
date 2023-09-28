@@ -31,6 +31,19 @@ body{
    color: white;
  }
 
+ [type=submit] {
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+ }
+
+ [type=submit]:hover {
+  background-color: #2196F3;
+  color: white;
+}
+
  .button-update {
   padding: 6px;
   border: none;

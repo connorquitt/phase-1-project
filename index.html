@@ -9,18 +9,18 @@
   <body>
         <div>
           <h1>Clicker Game</h1>
-          <h1 id="timer">2</h1>
+          <h1 id="timer">15</h1>
           <h1 id="points">points: 0</h1>
         </div>
         <div class="profile">
           <input type="text" placeholder="Username" id="username">
-          <button class="button" id="start-btn">Start</button>
+          <form>
+            <input type="submit" id="start-btn">
+          </form>
         </div>
         <div class="clickers">
           <img id="red-clicker" src="https://i.imgur.com/607gv3s.png">
-          <form class="hidden" id="retry">
-              <input type="submit" class="button"></input>
-          </form>
+          <button class="button" id="retry">Start Over</button>
         </div>
         <div>
           <h2 id="score-msg"></h2>
