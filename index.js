@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         //scoreboard update from points scored
         function updateScore(team) {
-            fetch(`http://localhost:3000/teams/${team.teamName}`, {
+            fetch(`http://localhost:3000/teams/${team.id}`, {
             method: 'PATCH',
             headers:{
                 'Content-Type': 'application/json'
