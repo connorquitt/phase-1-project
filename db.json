@@ -1,30 +1,29 @@
 {
-    "teams": [
-      {
-        "id": 1,
-        "teamName": "purple",
-        "score": 0
-      },
-      {
-        "id": 2,
-        "teamName": "blue",
-        "score": 15
-        
-      },
-      {
-        "id": 3,
-        "teamName": "yellow",
-        "score": 0
-      },
-      {
-        "id": 4,
-        "teamName": "green",
-        "score": 0
-      },
-      {
-        "id": 5,
-        "teamName": "pink",
-        "score": 0
-      }
-    ]
-  }
+  "teams": [
+    {
+      "id": 1,
+      "teamName": "purple",
+      "score": 29
+    },
+    {
+      "id": 2,
+      "teamName": "blue",
+      "score": 32
+    },
+    {
+      "id": 3,
+      "teamName": "yellow",
+      "score": 0
+    },
+    {
+      "id": 4,
+      "teamName": "green",
+      "score": 0
+    },
+    {
+      "id": 5,
+      "teamName": "pink",
+      "score": 0
+    }
+  ]
+}
