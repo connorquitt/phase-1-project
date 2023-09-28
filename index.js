@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let timer = document.querySelector("#timer")
     const finalMsg = document.querySelector("#score-msg")
     const retryBtn = document.querySelector("#retry")
+        retryBtn.innerText = 'Start Over'
     const scoreboard = document.querySelector("#scoreboard")
     
     
@@ -14,7 +15,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     //makes username and team select store values
     document.querySelector("#start-btn").addEventListener("click", ()=>{
         username.textContent = username.value 
-        retryBtn.innerText = 'Retry'
         //makes timer start
         const gameTimer = setInterval(countdown, 1000)
         gameTimer
