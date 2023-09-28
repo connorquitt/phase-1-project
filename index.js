@@ -95,6 +95,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
         document.addEventListener("keydown", () => {
             if(event.key === "Tab") {
                 document.querySelector("#score-hold").classList.remove("hidden")
+                document.querySelector("#score-reveal").classList.add("hidden")
+                retryBtn.classList.remove("hidden")
             }
         })
 
