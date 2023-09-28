@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", ()=>{
     //variables
     let username = document.querySelector("#username")
-    let team = document.querySelector("#click-drop")
     const clicker = document.querySelector("#red-clicker")
     const points = document.querySelector("#points")
     let clicks = 0
@@ -14,20 +13,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
     //makes username and team select store values
     document.querySelector("#start-btn").addEventListener("click", ()=>{
         username.textContent = username.value 
-        team.textContent = team.value
         
         //makes timer start
         const gameTimer = setInterval(countdown, 1000)
         gameTimer
-    })
 
-    //makes button work and stores points
+        //makes button work and stores points
     clicker.addEventListener("click", ()=>{
         if(timer.textContent > 0){
             clicks++
             points.innerHTML= `points: ${clicks}`
         }
     })
+    })
+
 
     //makes retry button work
     retryBtn.addEventListener("click", ()=> document.location.reload(true))
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         if(timer.textContent == 0){
             clearTimeout()
             let finalScore = clicks
-            finalMsg.textContent = `Congrats ${username.textContent} on scoring ${finalScore} for team ${team.textContent}!`
+            finalMsg.textContent = `Congrats ${username.textContent} on scoring ${finalScore}! Please select which team to donate them to`
             retryBtn.classList.remove("hidden")
             scoreboard.classList.remove("hidden")
         }
@@ -50,10 +49,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
             data.forEach((e)=>{
                 let teamScore = document.createElement('li')
                     teamScore.innerHTML = `${e.teamName} has: ${e.score} points!`
-                    scoreboard.appendChild(teamScore)
-
+                let updatePoints = document.createElement('button')
+                    updatePoints.textContent = 'Select Team'
+                teamScore.appendChild(updatePoints)
+                scoreboard.appendChild(teamScore)
             })
         })
+
+        //scoreboard update from points scored
+        fetch(`ttp://localhost:3000/teams`, {
+            method: 'PATCH',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify()
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
 
     //functions
         
@@ -66,17 +78,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }
         }
 
-        
-      //submit button/updating scoring in json file
-        function updateScore(teamObj) {
-            fetch(`http://localhost:3000/teams${teamObj.id}`,{
-                method: "PATCH",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(score)
-            })
-        }
         
    
 })
