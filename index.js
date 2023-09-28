@@ -9,13 +9,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const finalMsg = document.querySelector("#score-msg")
     const retryBtn = document.querySelector("#retry")
     const scoreboard = document.querySelector("#scoreboard")
-    const purpleScore = document.querySelector("#purple-total")
-    const blueScore = document.querySelector("#blue-total")
-    const yellowScore = document.querySelector("#yellow-total")
-    const greenScore = document.querySelector("#green-total")
-    let localScore = []
     
-
+    
     //makes username and team select store values
     document.querySelector("#start-btn").addEventListener("click", ()=>{
         username.textContent = username.value 
@@ -47,6 +42,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
             scoreboard.classList.remove("hidden")
         }
     }, 100)
+
+    //scoreboard functionality
+    
 
     //functions
         
