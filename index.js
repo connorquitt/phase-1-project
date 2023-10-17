@@ -125,7 +125,7 @@ function resetPage(){
 }
 
 
-
+ 
 /*
     organize code better (DONE)
         - double check indentation on functions/variables to make sure its obvious they aren't inside of other things
