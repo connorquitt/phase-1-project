@@ -15,8 +15,7 @@ const scoreboard = document.querySelector("#scoreboard")
 document.querySelector("#start-btn").addEventListener("click", ()=>{
     //Stores username entry
     username.textContent = username.value 
-    //Timer
-    
+    //Timer functionality
     function countdown(){
         if(timer.textContent == 0) {
             clearInterval(gameTimer)
@@ -24,7 +23,6 @@ document.querySelector("#start-btn").addEventListener("click", ()=>{
             timer.textContent--
         }
     }
-
     const gameTimer = setInterval(countdown, 1000)
     gameTimer
 
@@ -108,7 +106,15 @@ function makeScoreCard(e){
 
 
 
-
+/*
+    organize code better (DONE)
+        - double check indentation on functions/variables to make sure its obvious they aren't inside of other things
+        -organize its order better so you can find things better without looking dumb
+    Update event listeners to make the score update a submit and not a click to fufill 3 unique event listers (NOT DONE)
+    get rid of foreach and refactor the teams so that there is a select bar at the top to choose your team (NOT DONE)
+        -save the team selected in a glabal variable, then run .filter on the array of teams returned from a fetch to get the correct team and update score
+    
+*/
 
 
 
