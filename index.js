@@ -6,19 +6,23 @@ const points = document.querySelector("#points")
 let clicks = 0
 let timer = document.querySelector("#timer")
 const finalMsg = document.querySelector("#score-msg")
-const retryBtn = document.querySelector("#retry")
-    retryBtn.innerText = 'Start Over'
+const retryBtn = document.getElementById("retry")
 const scoreboard = document.querySelector("#scoreboard")
+const startBtn = document.querySelector("#start-btn")
+const btnDiv = document.getElementById('clickers')
 
 //Timer, Username entry, Button, and updates points value
 //Click is unique event listener #1
-document.querySelector("#start-btn").addEventListener("click", ()=>{
+startBtn.addEventListener("click", ()=>{
+
+    btnDiv.classList.add('started')
     //Stores username entry
     username.textContent = username.value 
     //Timer functionality
     function countdown(){
         if(timer.textContent == 0) {
             clearInterval(gameTimer)
+            btnDiv.classList.remove("started")
         }else {
             timer.textContent--
         }
@@ -27,12 +31,16 @@ document.querySelector("#start-btn").addEventListener("click", ()=>{
     gameTimer
 
     //makes button work and stores points
-clicker.addEventListener("click", ()=>{
-    if(timer.textContent > 0){
-        clicks++
-        points.textContent= `points: ${clicks}`
-    }
+    
 })
+
+clicker.addEventListener("click", ()=>{
+    if(timer.textContent > 0 && btnDiv.className === "started"){
+        clicks = clicks + 1
+        points.textContent= `points: ${clicks}`
+    }else if(timer.textContent === 0) {
+        return null
+    }
 })
 
 
@@ -47,7 +55,8 @@ setInterval(function checkTimer() {
 }, 100)
 
 
-//Reveal scoreboard with tab (Unique event listener #2)
+//Reveal scoreboard with tab
+//Unique event listener #2 (keydown)
 document.addEventListener("keydown", () => {
     if(event.key === "Tab") {
         document.querySelector("#score-hold").classList.remove("hidden")
@@ -58,7 +67,8 @@ document.addEventListener("keydown", () => {
         //wantt to update to be able to rehide with tab again
 
 //Retry button
-retryBtn.addEventListener("click", ()=> document.location.reload(true))
+//Unique event listener #3 (submit)
+retryBtn.addEventListener("submit", ()=> resetPage())
         //update to not reload page but to instead just update DOM to a fresh start
 
 
@@ -104,13 +114,23 @@ function makeScoreCard(e){
         })
 }
 
+//function to reset all DOM elements of the page for the try again button instead of refreshing the page
+function resetPage(){
+    event.preventDefault()
+    timer.textContent = 5
+    scoreboard.classList.add("hidden")
+    retryBtn.classList.add("hidden")
+    finalMsg.classList.add("hidden")
+
+}
+
 
 
 /*
     organize code better (DONE)
         - double check indentation on functions/variables to make sure its obvious they aren't inside of other things
         -organize its order better so you can find things better without looking dumb
-    Update event listeners to make the score update a submit and not a click to fufill 3 unique event listers (NOT DONE)
+    Update event listeners to make the score update a submit and not a click to fufill 3 unique event listers (DONE)
     get rid of foreach and refactor the teams so that there is a select bar at the top to choose your team (NOT DONE)
         -save the team selected in a glabal variable, then run .filter on the array of teams returned from a fetch to get the correct team and update score
     

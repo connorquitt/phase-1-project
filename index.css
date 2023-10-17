@@ -49,12 +49,21 @@ body{
   border: none;
   margin-top: 8px;
   margin-right: 16px;
+  margin-left: 16px;
   font-size: 17px;
 }
 
 .button-update:hover {
   background-color: #2196F3;
   color: white;
+}
+
+#retry {
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
 }
 
  #drop-label {
@@ -75,7 +84,7 @@ body{
   font-size: 17px;
  }
 
-.clickers {
+#clickers {
   margin-top: 90px;
   margin-left: 150px;
 
