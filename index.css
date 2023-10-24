@@ -96,3 +96,7 @@ body{
   border: none;
   margin-left: 50px;
 }
+
+#scoreboard {
+  font-size: 25px;
+}

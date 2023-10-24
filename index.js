@@ -10,6 +10,7 @@ const retryBtn = document.getElementById("retry")
 const scoreboard = document.querySelector("#scoreboard")
 const startBtn = document.querySelector("#start-btn")
 const btnDiv = document.getElementById('clickers')
+let showScore = true
 
 //Timer, Username entry, Button, and updates points value
 //Click is unique event listener #1
@@ -17,7 +18,8 @@ startBtn.addEventListener("click", ()=>{
 
     btnDiv.classList.add('started')
     //Stores username entry
-    username.textContent = username.value 
+    username.textContent = username.value
+    username.value = ''
     //Timer functionality
     function countdown(){
         if(timer.textContent == 0) {
@@ -45,23 +47,29 @@ clicker.addEventListener("click", ()=>{
 
 
 //Triggers final message and unhides scoreboard/retry btn when timer is at 0
-setInterval(function checkTimer() {
+function checkTimer() {
     if(timer.textContent == 0){
-        clearTimeout()
+        clearInterval()
         finalMsg.textContent = `Congrats ${username.textContent} you have ${clicks} points! Please select which team to donate them to`
         retryBtn.classList.remove("hidden")
         document.querySelector("#score-hold").classList.remove("hidden")
     }
-}, 100)
+}
 
+setInterval(checkTimer, 100)
 
 //Reveal scoreboard with tab
 //Unique event listener #2 (keydown)
 document.addEventListener("keydown", () => {
     if(event.key === "Tab") {
-        document.querySelector("#score-hold").classList.remove("hidden")
-        document.querySelector("#score-reveal").classList.add("hidden")
-        retryBtn.classList.remove("hidden")
+        showScore = !showScore
+        if(showScore === false) {
+            document.querySelector("#score-hold").classList.remove("hidden")
+            document.querySelector("#score-reveal").textContent = 'Press tab to hide scoreboard'
+        } else if (showScore === true) {
+            document.querySelector("#score-hold").classList.add("hidden")
+            document.querySelector("#score-reveal").textContent = 'Press tab to see scoreboard'
+        }
     }
 })
         //wantt to update to be able to rehide with tab again
@@ -73,12 +81,15 @@ retryBtn.addEventListener("submit", ()=> resetPage())
 
 
 //Fetch request to create scoreboard and start with the correct points
-fetch(`http://localhost:3000/teams`)
+function scoreGrab() {
+    fetch(`http://localhost:3000/teams`)
         .then(res => res.json())
-        .then(data => data.forEach(e => makeScoreCard(e)))
+        .then(data => data.map((team) => makeScoreCard(team)))}
             //after updating how to select team will need to change to use filter
                 //will store the selected team in a global variable and then use filter to get the correct team and update that teams point total with patch
-         
+
+scoreGrab()
+
 //function to update the score (PATCH) after game ends
 function updateScore(team) {
     fetch(`http://localhost:3000/teams/${team.id}`, {
@@ -93,35 +104,65 @@ function updateScore(team) {
 }
 
 
-//function used to create each scorecard
-function makeScoreCard(e){
+// function used to create each scorecard
+// function makeScoreCard(e){
+//     let teamPoints = e.score
+//         teamPoints.id = 'current-points'
+//     let teamScore = document.createElement('li')
+//             teamScore.textContent = `${e.teamName} has: ${e.score} points!`
+//         let updatePoints = document.createElement('button')
+//             updatePoints.className = 'update-button'
+//             updatePoints.id = 'submit-score'
+//             updatePoints.textContent = 'Select Team'
+//         teamScore.appendChild(updatePoints)
+//         scoreboard.appendChild(teamScore)
+//         teamScore.querySelector("#submit-score").addEventListener('click', ()=> {
+//             e.score += clicks
+//             clicks = 0
+//             teamScore.textContent = `${e.teamName} has: ${e.score} points!`
+//             points.textContent = `points: ${clicks}`
+//             updateScore(e)
+//         })
+// }
+
+function makeScoreCard(e) {
     let teamPoints = e.score
         teamPoints.id = 'current-points'
-    let teamScore = document.createElement('li')
-            teamScore.textContent = `${e.teamName} has: ${e.score} points!`
-        let updatePoints = document.createElement('button')
-            updatePoints.className = 'update-button'
-            updatePoints.id = 'submit-score'
-            updatePoints.textContent = 'Select Team'
-        teamScore.appendChild(updatePoints)
-        scoreboard.appendChild(teamScore)
-        teamScore.querySelector("#submit-score").addEventListener('click', ()=> {
+    let teamScore = document.createElement('ul')
+        teamScore.innerHTML = `
+            <div>
+                <p>
+                    ${e.teamName} has: ${e.score} points!
+                    <button id='submit-score'>Select Team</button>
+                </p>
+            </div>
+        `
+        teamScore.querySelector('#submit-score').addEventListener('click', () => {
             e.score += clicks
             clicks = 0
-            teamScore.textContent = `${e.teamName} has: ${e.score} points!`
             points.textContent = `points: ${clicks}`
+            teamScore.innerHTML = `
+            <div>
+            <p>
+                ${e.teamName} has: ${e.score} points!
+                <button id='submit-score'>Select Team</button>
+            </p>
+        </div>
+            `
             updateScore(e)
         })
+        scoreboard.appendChild(teamScore)
+    
 }
 
 //function to reset all DOM elements of the page for the try again button instead of refreshing the page
 function resetPage(){
     event.preventDefault()
     timer.textContent = 5
-    scoreboard.classList.add("hidden")
+    document.querySelector("#score-hold").classList.add("hidden")
     retryBtn.classList.add("hidden")
     finalMsg.classList.add("hidden")
-
+    
 }
 
 
