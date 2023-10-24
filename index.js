@@ -144,16 +144,10 @@ function resetPage(){
 }
 
 
- 
-/*
-    organize code better (DONE)
-        - double check indentation on functions/variables to make sure its obvious they aren't inside of other things
-        -organize its order better so you can find things better without looking dumb
-    Update event listeners to make the score update a submit and not a click to fufill 3 unique event listers (DONE)
-    get rid of foreach and refactor the teams so that there is a select bar at the top to choose your team (NOT DONE)
-        -save the team selected in a glabal variable, then run .filter on the array of teams returned from a fetch to get the correct team and update score
-    
-*/
+//db.json server sends 5 objects (teams) each with 3 attributes (name, id, and score)
+//app runs on one page with no refreshes
+//3 unique event listeners (click on line 17, keydown on line 17, and submit on line 79)
+//array iterator (map) on line 87
 
 
 
