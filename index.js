@@ -103,28 +103,6 @@ function updateScore(team) {
 .then(data => console.log(data))
 }
 
-
-// function used to create each scorecard
-// function makeScoreCard(e){
-//     let teamPoints = e.score
-//         teamPoints.id = 'current-points'
-//     let teamScore = document.createElement('li')
-//             teamScore.textContent = `${e.teamName} has: ${e.score} points!`
-//         let updatePoints = document.createElement('button')
-//             updatePoints.className = 'update-button'
-//             updatePoints.id = 'submit-score'
-//             updatePoints.textContent = 'Select Team'
-//         teamScore.appendChild(updatePoints)
-//         scoreboard.appendChild(teamScore)
-//         teamScore.querySelector("#submit-score").addEventListener('click', ()=> {
-//             e.score += clicks
-//             clicks = 0
-//             teamScore.textContent = `${e.teamName} has: ${e.score} points!`
-//             points.textContent = `points: ${clicks}`
-//             updateScore(e)
-//         })
-// }
-
 function makeScoreCard(e) {
     let teamPoints = e.score
         teamPoints.id = 'current-points'
